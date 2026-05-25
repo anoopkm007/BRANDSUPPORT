@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SupportDesk — Customer Support Outsourcing for D2C Brands</title>
+  <meta name="description" content="Outsource your entire customer support function to a D2C-specialist team. Per-ticket pricing. No fixed headcount. Full visibility." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #0D1F35;
+      --blue: #1A56A0;
+      --orange: #E8611A;
+      --cream: #F9F6F0;
+      --text: #1A1A1A;
+      --muted: #666;
+      --border: #E2E8F0;
+      --white: #fff;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--white); line-height: 1.6; }
+
+    /* ── NAV ── */
+    nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 48px; border-bottom: 1px solid var(--border);
+      position: sticky; top: 0; background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(8px); z-index: 100;
+    }
+    .logo { font-family: 'Fraunces', serif; font-size: 22px; font-weight: 700; color: var(--navy); text-decoration: none; }
+    .logo span { color: var(--orange); }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a { font-size: 14px; color: var(--muted); text-decoration: none; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--navy); }
+    .nav-cta { background: var(--navy); color: var(--white); padding: 10px 24px; border-radius: 6px; font-size: 14px; font-weight: 500; text-decoration: none; transition: background 0.2s; }
+    .nav-cta:hover { background: var(--blue); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--navy); border-radius: 2px; transition: all 0.3s; }
+
+    /* ── HERO ── */
+    .hero { padding: 100px 48px 80px; max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--cream); border: 1px solid var(--border); border-radius: 100px; padding: 6px 16px; font-size: 13px; color: var(--muted); margin-bottom: 24px; }
+    .hero-badge-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--orange); }
+    .hero h1 { font-family: 'Fraunces', serif; font-size: 52px; font-weight: 700; line-height: 1.1; letter-spacing: -1.5px; color: var(--navy); margin-bottom: 20px; }
+    .hero h1 em { font-style: italic; color: var(--orange); }
+    .hero p { font-size: 17px; color: var(--muted); line-height: 1.7; margin-bottom: 36px; font-weight: 300; }
+    .hero-btns { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+    .btn-primary { background: var(--orange); color: var(--white); padding: 14px 32px; border-radius: 6px; font-size: 15px; font-weight: 500; text-decoration: none; transition: background 0.2s; display: inline-block; }
+    .btn-primary:hover { background: #c94e10; }
+    .btn-secondary { font-size: 15px; color: var(--navy); font-weight: 500; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
+    .btn-secondary:hover { color: var(--orange); }
+    .hero-visual { background: var(--cream); border-radius: 16px; padding: 32px; border: 1px solid var(--border); }
+    .chat-bubble { background: var(--white); border-radius: 12px; padding: 14px 18px; margin-bottom: 12px; border: 1px solid var(--border); font-size: 14px; line-height: 1.5; }
+    .chat-bubble.brand { background: var(--navy); color: var(--white); border-color: var(--navy); }
+    .chat-meta { font-size: 11px; color: var(--muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .chat-meta.light { color: rgba(255,255,255,0.6); }
+    .response-time { display: flex; align-items: center; gap: 8px; margin-top: 20px; padding: 12px 16px; background: var(--white); border-radius: 8px; border: 1px solid var(--border); }
+    .rt-dot { width: 10px; height: 10px; border-radius: 50%; background: #22c55e; animation: pulse 2s infinite; flex-shrink: 0; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+    .rt-text { font-size: 13px; color: var(--muted); }
+    .rt-text strong { color: var(--navy); }
+
+    /* ── PROBLEM ── */
+    .problem { background: var(--navy); color: var(--white); padding: 80px 48px; }
+    .problem-inner { max-width: 1100px; margin: 0 auto; }
+    .problem h2 { font-family: 'Fraunces', serif; font-size: 40px; font-weight: 700; letter-spacing: -1px; margin-bottom: 16px; }
+    .problem > .problem-inner > p { font-size: 17px; color: rgba(255,255,255,0.6); max-width: 600px; margin-bottom: 56px; font-weight: 300; }
+    .cost-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+    .cost-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 24px; }
+    .cost-number { font-family: 'Fraunces', serif; font-size: 36px; font-weight: 700; color: var(--orange); margin-bottom: 6px; }
+    .cost-label { font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.5; }
+
+    /* ── SERVICES ── */
+    .services { padding: 80px 48px; max-width: 1100px; margin: 0 auto; }
+    .section-tag { font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: 1.5px; color: var(--orange); margin-bottom: 16px; }
+    .section-title { font-family: 'Fraunces', serif; font-size: 40px; font-weight: 700; letter-spacing: -1px; color: var(--navy); margin-bottom: 12px; }
+    .section-sub { font-size: 17px; color: var(--muted); font-weight: 300; margin-bottom: 56px; max-width: 560px; }
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .service-card { border: 1px solid var(--border); border-radius: 12px; padding: 28px; transition: border-color 0.2s, transform 0.2s; }
+    .service-card:hover { border-color: var(--blue); transform: translateY(-3px); }
+    .service-icon { width: 44px; height: 44px; border-radius: 10px; background: var(--cream); display: flex; align-items: center; justify-content: center; margin-bottom: 16px; font-size: 22px; }
+    .service-card h3 { font-family: 'Fraunces', serif; font-size: 20px; font-weight: 600; color: var(--navy); margin-bottom: 8px; }
+    .service-card p { font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+    /* ── WHY ── */
+    .why { background: var(--cream); padding: 80px 48px; }
+    .why-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .why h2 { font-family: 'Fraunces', serif; font-size: 40px; font-weight: 700; letter-spacing: -1px; color: var(--navy); margin-bottom: 16px; }
+    .why > .why-inner > div > p { font-size: 16px; color: var(--muted); font-weight: 300; margin-bottom: 40px; }
+    .why-points { display: flex; flex-direction: column; gap: 24px; }
+    .why-point { display: flex; gap: 16px; align-items: flex-start; }
+    .why-num { width: 32px; height: 32px; border-radius: 8px; background: var(--navy); color: var(--white); font-size: 13px; font-weight: 600; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+    .why-point h4 { font-size: 15px; font-weight: 500; color: var(--navy); margin-bottom: 4px; }
+    .why-point p { font-size: 14px; color: var(--muted); }
+    .why-visual { background: var(--white); border-radius: 16px; padding: 32px; border: 1px solid var(--border); }
+    .dash-title { font-size: 13px; font-weight: 600; color: var(--muted); margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; }
+    .metric-row { display: flex; justify-content: space-between; align-items: center; padding: 16px 0; border-bottom: 1px solid var(--border); }
+    .metric-row:last-child { border-bottom: none; }
+    .metric-label { font-size: 14px; color: var(--muted); }
+    .metric-right { display: flex; align-items: center; gap: 10px; }
+    .metric-val { font-family: 'Fraunces', serif; font-size: 22px; font-weight: 700; color: var(--navy); }
+    .metric-change { font-size: 12px; font-weight: 500; color: #16a34a; background: #f0fdf4; padding: 3px 8px; border-radius: 100px; }
+    .metric-change.bad { color: #dc2626; background: #fef2f2; }
+
+    /* ── PRICING ── */
+    .pricing { padding: 80px 48px; max-width: 1100px; margin: 0 auto; text-align: center; }
+    .pricing .section-sub { margin: 0 auto 0; }
+    .pricing-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 56px; text-align: left; }
+    .pricing-card { border: 1px solid var(--border); border-radius: 12px; padding: 32px; position: relative; }
+    .pricing-card.featured { border-color: var(--navy); border-width: 2px; }
+    .featured-badge { position: absolute; top: -13px; left: 50%; transform: translateX(-50%); background: var(--navy); color: var(--white); font-size: 11px; font-weight: 600; padding: 4px 16px; border-radius: 100px; white-space: nowrap; text-transform: uppercase; letter-spacing: 0.5px; }
+    .plan-name { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--orange); margin-bottom: 8px; }
+    .plan-price { font-family: 'Fraunces', serif; font-size: 36px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+    .plan-price span { font-size: 14px; font-weight: 400; color: var(--muted); font-family: 'DM Sans', sans-serif; }
+    .plan-desc { font-size: 14px; color: var(--muted); margin-bottom: 24px; padding-bottom: 24px; border-bottom: 1px solid var(--border); line-height: 1.5; }
+    .plan-features { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
+    .plan-features li { font-size: 14px; color: var(--text); display: flex; align-items: center; gap: 10px; }
+    .check { width: 18px; height: 18px; border-radius: 50%; background: #f0fdf4; color: #16a34a; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 11px; font-weight: 700; }
+    .plan-btn { display: block; text-align: center; padding: 12px; border-radius: 6px; font-size: 14px; font-weight: 500; text-decoration: none; transition: all 0.2s; border: 1px solid var(--navy); color: var(--navy); cursor: pointer; background: transparent; width: 100%; }
+    .plan-btn:hover { background: var(--navy); color: var(--white); }
+    .plan-btn.primary-btn { background: var(--orange); color: var(--white); border-color: var(--orange); }
+    .plan-btn.primary-btn:hover { background: #c94e10; border-color: #c94e10; }
+
+    /* ── CTA ── */
+    .cta-section { background: var(--navy); padding: 80px 48px; text-align: center; }
+    .cta-section h2 { font-family: 'Fraunces', serif; font-size: 48px; font-weight: 700; color: var(--white); letter-spacing: -1.5px; margin-bottom: 16px; line-height: 1.15; }
+    .cta-section h2 em { font-style: italic; color: var(--orange); }
+    .cta-section p { font-size: 17px; color: rgba(255,255,255,0.6); margin-bottom: 36px; font-weight: 300; }
+    .cta-form { display: flex; gap: 12px; max-width: 480px; margin: 0 auto; }
+    .cta-form input { flex: 1; padding: 14px 20px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.08); color: var(--white); font-size: 14px; outline: none; font-family: 'DM Sans', sans-serif; transition: border-color 0.2s; }
+    .cta-form input:focus { border-color: rgba(255,255,255,0.4); }
+    .cta-form input::placeholder { color: rgba(255,255,255,0.35); }
+    .cta-form button { background: var(--orange); color: var(--white); border: none; padding: 14px 28px; border-radius: 6px; font-size: 14px; font-weight: 600; cursor: pointer; white-space: nowrap; transition: background 0.2s; font-family: 'DM Sans', sans-serif; }
+    .cta-form button:hover { background: #c94e10; }
+    .form-success { display: none; color: #4ade80; font-size: 15px; margin-top: 16px; }
+
+    /* ── FOOTER ── */
+    footer { padding: 40px 48px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+    .footer-logo { font-family: 'Fraunces', serif; font-size: 18px; font-weight: 700; color: var(--navy); }
+    .footer-logo span { color: var(--orange); }
+    footer p { font-size: 13px; color: var(--muted); }
+    .footer-links { display: flex; gap: 24px; list-style: none; }
+    .footer-links a { font-size: 13px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--navy); }
+
+    /* ── WHATSAPP FLOAT ── */
+    .wa-float { position: fixed; bottom: 28px; right: 28px; z-index: 999; background: #25D366; color: var(--white); width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; box-shadow: 0 4px 16px rgba(0,0,0,0.15); transition: transform 0.2s, box-shadow 0.2s; }
+    .wa-float:hover { transform: scale(1.1); box-shadow: 0 6px 24px rgba(0,0,0,0.2); }
+    .wa-float svg { width: 28px; height: 28px; fill: white; }
+
+    /* ── MODAL ── */
+    .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 200; align-items: center; justify-content: center; padding: 20px; }
+    .modal-overlay.active { display: flex; }
+    .modal { background: var(--white); border-radius: 16px; padding: 40px; max-width: 500px; width: 100%; position: relative; }
+    .modal-close { position: absolute; top: 16px; right: 16px; background: none; border: none; font-size: 22px; cursor: pointer; color: var(--muted); line-height: 1; }
+    .modal-close:hover { color: var(--text); }
+    .modal h3 { font-family: 'Fraunces', serif; font-size: 28px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+    .modal p { font-size: 15px; color: var(--muted); margin-bottom: 28px; }
+    .modal-form { display: flex; flex-direction: column; gap: 14px; }
+    .modal-form input, .modal-form select, .modal-form textarea {
+      padding: 12px 16px; border-radius: 6px; border: 1px solid var(--border);
+      font-size: 14px; font-family: 'DM Sans', sans-serif; outline: none;
+      transition: border-color 0.2s; width: 100%; color: var(--text); background: var(--white);
+    }
+    .modal-form input:focus, .modal-form select:focus, .modal-form textarea:focus { border-color: var(--blue); }
+    .modal-form textarea { resize: vertical; min-height: 80px; }
+    .modal-submit { background: var(--orange); color: var(--white); border: none; padding: 14px; border-radius: 6px; font-size: 15px; font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: background 0.2s; }
+    .modal-submit:hover { background: #c94e10; }
+    .modal-success { display: none; text-align: center; padding: 20px 0; }
+    .modal-success h4 { font-family: 'Fraunces', serif; font-size: 24px; color: var(--navy); margin-bottom: 8px; }
+    .modal-success p { color: var(--muted); font-size: 15px; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 16px 24px; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .nav-mobile { display: none; flex-direction: column; gap: 0; background: var(--white); border-bottom: 1px solid var(--border); padding: 8px 24px 16px; }
+      .nav-mobile.open { display: flex; }
+      .nav-mobile a { padding: 12px 0; font-size: 15px; color: var(--text); text-decoration: none; border-bottom: 1px solid var(--border); }
+      .nav-mobile a:last-child { border-bottom: none; }
+      .hero { grid-template-columns: 1fr; padding: 60px 24px 40px; gap: 40px; }
+      .hero h1 { font-size: 38px; }
+      .problem { padding: 60px 24px; }
+      .problem h2 { font-size: 32px; }
+      .cost-grid { grid-template-columns: repeat(2, 1fr); }
+      .services { padding: 60px 24px; }
+      .section-title { font-size: 32px; }
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .why { padding: 60px 24px; }
+      .why-inner { grid-template-columns: 1fr; gap: 40px; }
+      .why h2 { font-size: 32px; }
+      .pricing { padding: 60px 24px; }
+      .pricing-cards { grid-template-columns: 1fr; max-width: 400px; margin-left: auto; margin-right: auto; }
+      .cta-section { padding: 60px 24px; }
+      .cta-section h2 { font-size: 34px; }
+      .cta-form { flex-direction: column; }
+      footer { padding: 32px 24px; flex-direction: column; align-items: flex-start; gap: 12px; }
+    }
+    @media (max-width: 600px) {
+      .services-grid { grid-template-columns: 1fr; }
+      .cost-grid { grid-template-columns: 1fr 1fr; }
+      .hero h1 { font-size: 32px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav>
+  <a href="#" class="logo">Support<span>Desk</span></a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#why">Why Us</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#" class="nav-cta" onclick="openModal(); return false;">Get a Quote</a>
+  <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="nav-mobile" id="navMobile">
+  <a href="#services" onclick="toggleMenu()">Services</a>
+  <a href="#why" onclick="toggleMenu()">Why Us</a>
+  <a href="#pricing" onclick="toggleMenu()">Pricing</a>
+  <a href="#contact" onclick="toggleMenu()">Contact</a>
+  <a href="#" onclick="openModal(); toggleMenu(); return false;" style="color:var(--orange);font-weight:600;">Get a Quote →</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div>
+    <div class="hero-badge"><span class="hero-badge-dot"></span> Built for D2C brands</div>
+    <h1>Your customers deserve <em>better</em> than an in-house team</h1>
+    <p>Outsource your entire customer support function to a team that lives and breathes D2C. No fixed headcount. No training overhead. Just happy customers and a brand that scales.</p>
+    <div class="hero-btns">
+      <a href="#" class="btn-primary" onclick="openModal(); return false;">Get a Quote</a>
+      <a href="#services" class="btn-secondary">See how it works →</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="chat-bubble brand">
+      <div class="chat-meta light">Customer · 2 mins ago</div>
+      My order hasn't arrived yet — it's been 5 days. I'm really frustrated.
+    </div>
+    <div class="chat-bubble">
+      <div class="chat-meta">SupportDesk · Just now</div>
+      Hi Priya! I completely understand. I've tracked your order — it's out for delivery today and will reach you by 6pm. I've also added a ₹100 voucher to your account as an apology for the delay 🙏
+    </div>
+    <div class="response-time">
+      <div class="rt-dot"></div>
+      <div class="rt-text">Average first response time: <strong>under 4 minutes</strong></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="problem">
+  <div class="problem-inner">
+    <h2>In-house support is quietly killing your margins</h2>
+    <p>D2C brands spend a fortune on customer support infrastructure that doesn't need to be internal. Here's the real cost most founders never calculate.</p>
+    <div class="cost-grid">
+      <div class="cost-card">
+        <div class="cost-number">₹40K+</div>
+        <div class="cost-label">Per agent per month — salary, laptop, space, and management overhead</div>
+      </div>
+      <div class="cost-card">
+        <div class="cost-number">3–4</div>
+        <div class="cost-label">Months to hire, train, and get an agent to full productivity</div>
+      </div>
+      <div class="cost-card">
+        <div class="cost-number">40%</div>
+        <div class="cost-label">Average annual attrition in in-house support teams in India</div>
+      </div>
+      <div class="cost-card">
+        <div class="cost-number">0</div>
+        <div class="cost-label">Hours you should be spending managing support tickets as a founder</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="section-tag">What we handle</div>
+  <div class="section-title">Everything your customers need.<br>Nothing you have to manage.</div>
+  <div class="section-sub">We take over the full customer support function — across every channel, every ticket type, every platform your brand sells on.</div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">✉️</div>
+      <h3>Email Support</h3>
+      <p>Every order query, complaint, and feedback email — handled with your brand voice, under your brand name. SLA-backed response times.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">💬</div>
+      <h3>WhatsApp & Chat</h3>
+      <p>Real-time responses on WhatsApp Business and live chat — so your customers never wait for answers on their most-used channel.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">📦</div>
+      <h3>Order & Delivery</h3>
+      <p>Tracking updates, delay handling, lost shipment resolution — we manage it proactively before customers need to escalate.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🔄</div>
+      <h3>Returns & Refunds</h3>
+      <p>End-to-end returns processing, refund coordination with your ops team, and clear customer communication throughout.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">📞</div>
+      <h3>COD Follow-Ups</h3>
+      <p>Confirm COD orders before dispatch, reduce RTO rates, and recover potential lost revenue with structured follow-up workflows.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">⭐</div>
+      <h3>Reviews & Ratings</h3>
+      <p>Monitor, respond to, and manage your brand reputation across Amazon, Flipkart, and your own website — before it hurts conversion.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="why" id="why">
+  <div class="why-inner">
+    <div>
+      <div class="section-tag">Why SupportDesk</div>
+      <h2>We've been on your side of the table</h2>
+      <p>We're not a generic BPO. We're a team that has built and scaled D2C brands — so we understand what your customers expect and what your brand can't afford to get wrong.</p>
+      <div class="why-points">
+        <div class="why-point">
+          <div class="why-num">1</div>
+          <div>
+            <h4>D2C-native training</h4>
+            <p>Every agent is trained on D2C-specific scenarios — Shopify, marketplace ops, RTO, returns, COD. Not generic call centre scripts.</p>
+          </div>
+        </div>
+        <div class="why-point">
+          <div class="why-num">2</div>
+          <div>
+            <h4>Pay only for what you use</h4>
+            <p>Per-ticket pricing. No minimum commitments, no fixed salaries, no hidden overhead. Your cost scales exactly with your order volume.</p>
+          </div>
+        </div>
+        <div class="why-point">
+          <div class="why-num">3</div>
+          <div>
+            <h4>Full visibility, zero management</h4>
+            <p>Real-time dashboards, weekly reports, ticket-level tracking. You see everything — without having to manage anyone.</p>
+          </div>
+        </div>
+        <div class="why-point">
+          <div class="why-num">4</div>
+          <div>
+            <h4>Your brand voice, not ours</h4>
+            <p>We onboard to your tone, your SOPs, your escalation rules. Your customers will never know it's not your in-house team.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="why-visual">
+      <div class="dash-title">Live Dashboard — Sample Brand</div>
+      <div class="metric-row">
+        <span class="metric-label">Tickets resolved today</span>
+        <div class="metric-right"><span class="metric-val">142</span><span class="metric-change">↑ 98%</span></div>
+      </div>
+      <div class="metric-row">
+        <span class="metric-label">Avg. first response time</span>
+        <div class="metric-right"><span class="metric-val">3.8 min</span><span class="metric-change">↑ Fast</span></div>
+      </div>
+      <div class="metric-row">
+        <span class="metric-label">CSAT score this week</span>
+        <div class="metric-right"><span class="metric-val">4.7 / 5</span><span class="metric-change">↑ 12%</span></div>
+      </div>
+      <div class="metric-row">
+        <span class="metric-label">COD confirmation rate</span>
+        <div class="metric-right"><span class="metric-val">91%</span><span class="metric-change">↑ 8%</span></div>
+      </div>
+      <div class="metric-row">
+        <span class="metric-label">RTO rate</span>
+        <div class="metric-right"><span class="metric-val">6.2%</span><span class="metric-change bad">↓ 3%</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <div class="section-tag">Pricing</div>
+  <div class="section-title">Simple. Usage-based. No surprises.</div>
+  <div class="section-sub">Pay per ticket. No fixed headcount liability. Scale up or down any month based on your order volume.</div>
+  <div class="pricing-cards">
+    <div class="pricing-card">
+      <div class="plan-name">Starter</div>
+      <div class="plan-price">₹35 <span>/ ticket</span></div>
+      <div class="plan-desc">Up to 500 tickets/month. Perfect for early-stage D2C brands getting serious about support.</div>
+      <ul class="plan-features">
+        <li><span class="check">✓</span> Email support</li>
+        <li><span class="check">✓</span> WhatsApp support</li>
+        <li><span class="check">✓</span> Order & delivery queries</li>
+        <li><span class="check">✓</span> Weekly performance report</li>
+        <li><span class="check">✓</span> 9am – 9pm coverage</li>
+      </ul>
+      <button class="plan-btn" onclick="openModal()">Get a Quote</button>
+    </div>
+    <div class="pricing-card featured">
+      <div class="featured-badge">Most Popular</div>
+      <div class="plan-name">Growth</div>
+      <div class="plan-price">₹28 <span>/ ticket</span></div>
+      <div class="plan-desc">500–2000 tickets/month. For brands scaling fast and serious about CSAT and retention.</div>
+      <ul class="plan-features">
+        <li><span class="check">✓</span> All Starter features</li>
+        <li><span class="check">✓</span> Returns & refund handling</li>
+        <li><span class="check">✓</span> COD follow-ups</li>
+        <li><span class="check">✓</span> Review management</li>
+        <li><span class="check">✓</span> Real-time dashboard access</li>
+        <li><span class="check">✓</span> Dedicated account manager</li>
+      </ul>
+      <button class="plan-btn primary-btn" onclick="openModal()">Get a Quote</button>
+    </div>
+    <div class="pricing-card">
+      <div class="plan-name">Scale</div>
+      <div class="plan-price">Custom</div>
+      <div class="plan-desc">2000+ tickets/month. Full-stack support partner for high-volume brands with complex needs.</div>
+      <ul class="plan-features">
+        <li><span class="check">✓</span> All Growth features</li>
+        <li><span class="check">✓</span> Custom SLA agreements</li>
+        <li><span class="check">✓</span> Multi-platform support</li>
+        <li><span class="check">✓</span> 24/7 coverage option</li>
+        <li><span class="check">✓</span> CX strategy consulting</li>
+      </ul>
+      <button class="plan-btn" onclick="openModal()">Talk to Us</button>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <h2>Stop managing support.<br><em>Start scaling your brand.</em></h2>
+  <p>Get a custom quote in 24 hours. No commitment required.</p>
+  <div class="cta-form">
+    <input type="email" id="ctaEmail" placeholder="Your work email" />
+    <button onclick="submitCTA()">Get a Quote</button>
+  </div>
+  <div class="form-success" id="ctaSuccess">✓ Got it! We'll reach out within 24 hours.</div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Support<span>Desk</span></div>
+  <ul class="footer-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#why">Why Us</a></li>
+  </ul>
+  <p>© 2026 SupportDesk. Built for D2C brands · Bengaluru, India</p>
+</footer>
+
+<!-- WHATSAPP FLOAT BUTTON -->
+<!-- Replace +91XXXXXXXXXX with your actual WhatsApp number -->
+<a href="https://wa.me/91XXXXXXXXXX?text=Hi%2C%20I%27m%20interested%20in%20outsourcing%20my%20customer%20support.%20Can%20you%20share%20more%20details%3F" class="wa-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+
+<!-- QUOTE MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModalOnOverlay(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <div id="modalForm">
+      <h3>Get a custom quote</h3>
+      <p>Tell us about your brand and we'll get back to you within 24 hours.</p>
+      <div class="modal-form">
+        <input type="text" id="mName" placeholder="Your name" />
+        <input type="text" id="mBrand" placeholder="Brand name" />
+        <input type="email" id="mEmail" placeholder="Work email" />
+        <input type="tel" id="mPhone" placeholder="Phone / WhatsApp number" />
+        <select id="mVolume">
+          <option value="" disabled selected>Monthly ticket volume (approx)</option>
+          <option>Under 500 tickets</option>
+          <option>500 – 2000 tickets</option>
+          <option>2000 – 5000 tickets</option>
+          <option>5000+ tickets</option>
+          <option>Not sure yet</option>
+        </select>
+        <textarea id="mMessage" placeholder="Anything else you'd like us to know about your brand or support needs?"></textarea>
+        <button class="modal-submit" onclick="submitModal()">Send Quote Request →</button>
+      </div>
+    </div>
+    <div class="modal-success" id="modalSuccess">
+      <div style="font-size:40px;margin-bottom:16px">🎉</div>
+      <h4>We've got your request!</h4>
+      <p>We'll review your details and reach out within 24 hours with a custom quote.</p>
+      <br>
+      <p style="font-size:13px;color:var(--muted)">In the meantime, feel free to WhatsApp us directly for faster response.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  function toggleMenu() {
+    const m = document.getElementById('navMobile');
+    m.classList.toggle('open');
+  }
+
+  function openModal() {
+    document.getElementById('modalOverlay').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    document.getElementById('modalOverlay').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  function closeModalOnOverlay(e) {
+    if (e.target === document.getElementById('modalOverlay')) closeModal();
+  }
+
+  function submitModal() {
+    const name = document.getElementById('mName').value.trim();
+    const email = document.getElementById('mEmail').value.trim();
+    if (!name || !email) {
+      alert('Please enter at least your name and email.');
+      return;
+    }
+    // ── CONNECT YOUR FORM BACKEND HERE ──────────────────────────────
+    // Option 1: Replace with your Tally.so embed URL
+    // Option 2: Send to your email via EmailJS or Formspree
+    // Option 3: Send to WhatsApp:
+    const phone = document.getElementById('mPhone').value.trim();
+    const brand = document.getElementById('mBrand').value.trim();
+    const volume = document.getElementById('mVolume').value;
+    const msg = document.getElementById('mMessage').value.trim();
+    const waText = encodeURIComponent(
+      `New Quote Request\nName: ${name}\nBrand: ${brand}\nEmail: ${email}\nPhone: ${phone}\nVolume: ${volume}\nMessage: ${msg}`
+    );
+    // Uncomment line below and replace number to auto-send to your WhatsApp:
+    // window.open(`https://wa.me/91XXXXXXXXXX?text=${waText}`, '_blank');
+    document.getElementById('modalForm').style.display = 'none';
+    document.getElementById('modalSuccess').style.display = 'block';
+    setTimeout(() => {
+      closeModal();
+      document.getElementById('modalForm').style.display = 'block';
+      document.getElementById('modalSuccess').style.display = 'none';
+    }, 4000);
+  }
+
+  function submitCTA() {
+    const email = document.getElementById('ctaEmail').value.trim();
+    if (!email || !email.includes('@')) {
+      alert('Please enter a valid email address.');
+      return;
+    }
+    document.getElementById('ctaSuccess').style.display = 'block';
+    document.getElementById('ctaEmail').value = '';
+    // ── CONNECT YOUR EMAIL CAPTURE HERE ─────────────────────────────
+    // Send to Mailchimp, ConvertKit, or your own backend
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeModal();
+  });
+</script>
+
+</body>
+</html>
